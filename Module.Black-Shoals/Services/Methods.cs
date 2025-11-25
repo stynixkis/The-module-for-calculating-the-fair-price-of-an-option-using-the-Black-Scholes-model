@@ -2,7 +2,14 @@
 {
     public static class Methods
     {
-        public static double Normalization(double value)
+        /// <summary>
+        /// Кумулятивная функция распределения стандартного нормального закона
+        /// Вычисляет вероятность P(Z ≤ value) для Z ~ N(0,1)
+        /// Использует аппроксимацию Харта с точностью 1.5×10⁻⁷
+        /// </summary>
+        /// <param name="value">z-score стандартного нормального распределения</param>
+        /// <returns></returns>
+        public static double StandardNormalCDF(double value)
         {
             //coefficient1-5 - коэффициенты полиномиальной аппроксимации
             double coefficient1 = 0.254829592;
@@ -28,8 +35,13 @@
 
             return 0.5 * (1.0 + sign * errorFunction);
         }
-
-        public static double NormalizationDerivative(double value)
+        /// <summary>
+        /// Производная кумулятивной функции распределения стандартного нормального закона
+        /// Вычисляет плотность вероятности стандартного нормального распределения в точке value
+        /// </summary>
+        /// <param name="value">Точка, в которой вычисляется плотность вероятности</param>
+        /// <returns></returns>
+        public static double StandardNormalCDFDerivative(double value)
         {
             double valueOne = 1 / (Math.Sqrt(2 * Math.PI));
             double valueTwo = Math.Exp(Math.Pow(-value, 2) / 2);

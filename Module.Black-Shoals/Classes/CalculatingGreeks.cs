@@ -126,7 +126,7 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         private double CalculatingDeltaCall(double value)
         {
-            return Math.Round(Methods.Normalization(value), 4);
+            return Math.Round(Methods.StandardNormalCDF(value), 4);
         }
         /// <summary>
         /// Метод подсчета грека Дельта для опциона Put
@@ -135,7 +135,7 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         private double CalculatingDeltaPut(double value)
         {
-            return Math.Round((Methods.Normalization(value) - 1), 4);
+            return Math.Round((Methods.StandardNormalCDF(value) - 1), 4);
         }
         /// <summary>
         /// Метод подсчета грека Гамма
@@ -148,7 +148,7 @@ namespace Module.Black_Shoals.Classes
         private double CalculatingGamma(double d1, double currentPriceOfUnderlyingAsset,
             double volatility, double timeToOptioneExpiration)
         {
-            double valueOne = Methods.NormalizationDerivative(d1);
+            double valueOne = Methods.StandardNormalCDFDerivative(d1);
             double valueTwo = currentPriceOfUnderlyingAsset * volatility * Math.Sqrt(timeToOptioneExpiration);
             return Math.Round((valueOne / valueTwo), 4);
         }
@@ -162,7 +162,7 @@ namespace Module.Black_Shoals.Classes
         private double CalculatingVega(double d1, double currentPriceOfUnderlyingAsset,
             double timeToOptioneExpiration)
         {
-            return Math.Round((currentPriceOfUnderlyingAsset * Methods.NormalizationDerivative(d1) * Math.Sqrt(timeToOptioneExpiration)), 4);
+            return Math.Round((currentPriceOfUnderlyingAsset * Methods.StandardNormalCDFDerivative(d1) * Math.Sqrt(timeToOptioneExpiration)), 4);
         }
         /// <summary>
         /// Метод подсчета грека Тета для опциона Call
@@ -179,9 +179,9 @@ namespace Module.Black_Shoals.Classes
             double riskFreeInterestRate, double timeToOptioneExpiration, double volatility,
             double d1, double d2)
         {
-            double valueOne = currentPriceOfUnderlyingAsset * Methods.NormalizationDerivative(d1) * volatility;
+            double valueOne = currentPriceOfUnderlyingAsset * Methods.StandardNormalCDFDerivative(d1) * volatility;
             double valueTwo = valueOne / (2 * Math.Sqrt(timeToOptioneExpiration));
-            double valueThree = riskFreeInterestRate * strike * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.Normalization(d2);
+            double valueThree = riskFreeInterestRate * strike * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.StandardNormalCDF(d2);
             return Math.Round((-valueTwo - valueThree), 4);
         }
         /// <summary>
@@ -199,9 +199,9 @@ namespace Module.Black_Shoals.Classes
             double riskFreeInterestRate, double timeToOptioneExpiration, double volatility,
             double d1, double d2)
         {
-            double valueOne = currentPriceOfUnderlyingAsset * Methods.NormalizationDerivative(d1) * volatility;
+            double valueOne = currentPriceOfUnderlyingAsset * Methods.StandardNormalCDFDerivative(d1) * volatility;
             double valueTwo = valueOne / (2 * Math.Sqrt(timeToOptioneExpiration));
-            double valueThree = riskFreeInterestRate * strike * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.Normalization(-d2);
+            double valueThree = riskFreeInterestRate * strike * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.StandardNormalCDF(-d2);
             return Math.Round((-valueTwo + valueThree), 4);
         }
         /// <summary>
@@ -214,7 +214,7 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         private double CalculatingRoCall(double strike, double riskFreeInterestRate, double timeToOptioneExpiration, double d2)
         {
-            return Math.Round((strike * timeToOptioneExpiration * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.Normalization(d2)), 4);
+            return Math.Round((strike * timeToOptioneExpiration * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.StandardNormalCDF(d2)), 4);
         }
         /// <summary>
         /// Метод подсчета грека Ро для опциона Put
@@ -226,7 +226,7 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         private double CalculatingRoPut(double strike, double riskFreeInterestRate, double timeToOptioneExpiration, double d2)
         {
-            return Math.Round((-strike * timeToOptioneExpiration * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.Normalization(-d2)), 4);
+            return Math.Round((-strike * timeToOptioneExpiration * Math.Exp(-riskFreeInterestRate * timeToOptioneExpiration) * Methods.StandardNormalCDF(-d2)), 4);
         }
     }
 }

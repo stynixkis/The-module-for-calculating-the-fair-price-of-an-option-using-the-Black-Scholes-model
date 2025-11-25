@@ -99,8 +99,8 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         protected double CalculatingPriceOption_Call()
         {
-            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.Normalization(_d1);
-            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.Normalization(_d2);
+            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.StandardNormalCDF(_d1);
+            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.StandardNormalCDF(_d2);
             return Math.Round((valueOne - valueTwo), 2);
         }
         /// <summary>
@@ -109,8 +109,8 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         private double CalculatingPriceOption_Put()
         {
-            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.Normalization(-_d1);
-            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.Normalization(-_d2);
+            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.StandardNormalCDF(-_d1);
+            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.StandardNormalCDF(-_d2);
             return Math.Round((valueTwo - valueOne), 2);
         }
     }

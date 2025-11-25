@@ -1,7 +1,10 @@
 ﻿using Module.Black_Shoals.Classes;
 
-//CalculatingFairPriceOfEuropeanOption newOption1 = new CalculatingFairPriceOfEuropeanOption(38.6459, 40, 0.1, 0.5, 0.3);
-//PrintEurop(newOption1);
+CalculatingFairPriceOfEuropeanOption newOption1 = new CalculatingFairPriceOfEuropeanOption(38.6459, 40, 0.1, 0.5, 0.3);
+PrintEurop(newOption1);
+
+Console.WriteLine("\n-------------\n");
+
 CalculatingFairPriceOfAmericanOption newOption = new CalculatingFairPriceOfAmericanOption(40, 40, 0.1, 0.5, 0.3, [0.7, 0.7], [(2.0 / 12), (5.0 / 12)]);
 PrintAmerica(newOption);
 

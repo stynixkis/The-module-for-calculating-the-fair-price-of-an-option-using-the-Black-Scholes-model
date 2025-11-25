@@ -49,9 +49,7 @@
             else
                 PriceOptionCall = CalculatingPriceOption_Call();
 
-            GreeksValue.DeltaOptionPut = null;
-            GreeksValue.TetaOptionPut = null;
-            GreeksValue.RoOptionPut = null;
+            GreeksValue = new CalculatingGreeks(this);
         }
         /// <summary>
         /// Метод подсчета цены опциона Call
@@ -92,17 +90,34 @@
             //    _d2 = Calculating_d2();
             //}
 
-            double europeanToLastDividend = FirstMethod();
-            double europeanToMaturity = SecondMethod();
+            double[] europeanToLastDividend = FirstMethod();
+            double[] europeanToMaturity = SecondMethod();
 
-            return Math.Max(europeanToMaturity, europeanToLastDividend);
+            if(europeanToMaturity[0] > europeanToLastDividend[0])
+            {
+                CurrentPriceOfUnderlyingAsset = europeanToMaturity[1];
+                TimeToOptioneExpiration = europeanToMaturity[2];
+            }
+            else
+            {
+                CurrentPriceOfUnderlyingAsset = europeanToLastDividend[1];
+            }
+
+            _d1 = Calculating_d1();
+            _d2 = Calculating_d2();
+
+            PriceOptionCall = base.CalculatingPriceOption_Call();
+
+            GreeksValue = new CalculatingGreeks(this);
+
+            return Math.Max(europeanToMaturity[0], europeanToLastDividend[0]);
         }
         /// <summary>
         /// Первый метод расчёта, который гласит: Европейский колл с тем же сроком погашения, что и у оцениваемого американского колла, 
         /// но с ценой акций, уменьшенной на текущую стоимость дивидендов.
         /// </summary>
         /// <returns></returns>
-        private double FirstMethod()
+        private double[] FirstMethod()
         {
             double lastDividendTime = DividendTimes[DividendTimes.Length - 1];
             double adjustedPrice = CurrentPriceOfUnderlyingAsset;
@@ -129,7 +144,7 @@
             _d1 = Calculating_d1();
             _d2 = Calculating_d2();
 
-            return europeanToLastDividend;
+            return [europeanToLastDividend, adjustedPrice];
         }
         /// <summary>
         /// Это второй метод расчёта, который гласит: 
@@ -137,7 +152,7 @@
         /// Этот метод начинается так же, как и предыдущий, за исключением того, что срок погашения опциона устанавливается на последний срок погашения перед последним дивидендом
         /// </summary>
         /// <returns></returns>
-        private double SecondMethod()
+        private double[] SecondMethod()
         {
             double presentValueOfDividendsAtExDividendDatee = Dividends[Dividends.Length - 2] * Math.Exp(-RiskFreeInterestRate * DividendTimes[DividendTimes.Length - 2]);
             double adjustedPrice = CurrentPriceOfUnderlyingAsset - presentValueOfDividendsAtExDividendDatee;
@@ -163,7 +178,7 @@
             _d1 = Calculating_d1();
             _d2 = Calculating_d2();
 
-            return europeanToLastDividend;
+            return [europeanToLastDividend, adjustedPrice, DividendTimes[DividendTimes.Length - 1]];
         }
     }
 }

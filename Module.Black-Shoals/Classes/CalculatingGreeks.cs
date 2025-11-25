@@ -95,7 +95,7 @@ namespace Module.Black_Shoals.Classes
             set { _roOptionPut = value; }
         }
         /// <summary>
-        /// Конструктор класса
+        /// Конструктор класса, принимающий параметры
         /// </summary>
         /// <param name="currentPriceOfUnderlyingAsset">Рыночная цена базового актива</param>
         /// <param name="strike">Цена исполнения (страйк)</param>
@@ -119,6 +119,42 @@ namespace Module.Black_Shoals.Classes
             RoOptionCall = CalculatingRoCall(strike, riskFreeInterestRate, timeToOptioneExpiration, d2);
             RoOptionPut = CalculatingRoPut(strike, riskFreeInterestRate, timeToOptioneExpiration, d2);
         }
+        /// <summary>
+        /// Конструктор класса, принимающий экземпляр класса для подсчета европейского опциона
+        /// </summary>
+        /// <param name="europeanOption">Экземпляр класса CalculatingFairPriceOfEuropeanOption</param>
+        public CalculatingGreeks(CalculatingFairPriceOfEuropeanOption europeanOption)
+        {
+            DeltaOptionCall = CalculatingDeltaCall(europeanOption._d1);
+            DeltaOptionPut = CalculatingDeltaPut(europeanOption._d1);
+            Gamma = CalculatingGamma(europeanOption._d1, europeanOption.CurrentPriceOfUnderlyingAsset, europeanOption.Volatility, europeanOption.TimeToOptioneExpiration);
+            Vega = CalculatingVega(europeanOption._d1, europeanOption.CurrentPriceOfUnderlyingAsset, europeanOption.TimeToOptioneExpiration);
+            TetaOptionCall = CalculatingTetaCall(europeanOption.CurrentPriceOfUnderlyingAsset, europeanOption.Strike, europeanOption.RiskFreeInterestRate,
+                europeanOption.TimeToOptioneExpiration, europeanOption.Volatility, europeanOption._d1, europeanOption._d2);
+            TetaOptionPut = CalculatingTetaPut(europeanOption.CurrentPriceOfUnderlyingAsset, europeanOption.Strike, europeanOption.RiskFreeInterestRate,
+                europeanOption.TimeToOptioneExpiration, europeanOption.Volatility, europeanOption._d1, europeanOption._d2);
+            RoOptionCall = CalculatingRoCall(europeanOption.Strike, europeanOption.RiskFreeInterestRate, europeanOption.TimeToOptioneExpiration, europeanOption._d2);
+            RoOptionPut = CalculatingRoPut(europeanOption.Strike, europeanOption.RiskFreeInterestRate, europeanOption.TimeToOptioneExpiration, europeanOption._d2);
+        }
+        /// <summary>
+        /// Конструктор класса, принимающий экземпляр класса для подсчета американского опциона
+        /// </summary>
+        /// <param name="americanOption">Экземпляр класса CalculatingFairPriceOfAmericanOption</param>
+        public CalculatingGreeks(CalculatingFairPriceOfAmericanOption americanOption)
+        {
+            DeltaOptionCall = CalculatingDeltaCall(americanOption._d1);
+            DeltaOptionPut = null;
+            Gamma = CalculatingGamma(americanOption._d1, americanOption.CurrentPriceOfUnderlyingAsset, americanOption.Volatility, americanOption.TimeToOptioneExpiration);
+            Vega = CalculatingVega(americanOption._d1, americanOption.CurrentPriceOfUnderlyingAsset, americanOption.TimeToOptioneExpiration);
+            TetaOptionCall = CalculatingTetaCall(americanOption.CurrentPriceOfUnderlyingAsset, americanOption.Strike, americanOption.RiskFreeInterestRate,
+                americanOption.TimeToOptioneExpiration, americanOption.Volatility, americanOption._d1, americanOption._d2);
+            TetaOptionPut = null;
+            RoOptionCall = CalculatingRoCall(americanOption.Strike, americanOption.RiskFreeInterestRate, americanOption.TimeToOptioneExpiration, americanOption._d2);
+            RoOptionPut = null;
+        }
+
+
+
         /// <summary>
         /// Метод подсчета грека Дельта для опциона Call
         /// </summary>

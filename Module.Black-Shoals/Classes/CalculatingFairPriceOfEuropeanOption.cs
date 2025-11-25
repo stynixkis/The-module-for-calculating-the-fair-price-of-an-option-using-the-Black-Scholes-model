@@ -30,11 +30,11 @@ namespace Module.Black_Shoals.Classes
         /// <summary>
         /// Коэффициент d1
         /// </summary>
-        protected double _d1 { get; set; }
+        internal double _d1 { get; set; }
         /// <summary>
         /// Коэффициент d2
         /// </summary>
-        protected double _d2 { get; set; }
+        internal double _d2 { get; set; }
         /// <summary>
         /// Стоимость опциона Call
         /// </summary>
@@ -70,8 +70,7 @@ namespace Module.Black_Shoals.Classes
             PriceOptionCall = CalculatingPriceOption_Call();
             PriceOptionPut = CalculatingPriceOption_Put();
 
-            GreeksValue = new CalculatingGreeks(CurrentPriceOfUnderlyingAsset, Strike, RiskFreeInterestRate,
-                TimeToOptioneExpiration, Volatility, _d1, _d2);
+            GreeksValue = new CalculatingGreeks(this);
         }
         /// <summary>
         /// Метод подсчета коэффициента d1

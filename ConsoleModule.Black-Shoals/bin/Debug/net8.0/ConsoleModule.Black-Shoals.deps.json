@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ConsoleModule.Black-Shoals/1.0.0": {
+        "dependencies": {
+          "Module.Black-Shoals": "1.0.0"
+        },
+        "runtime": {
+          "ConsoleModule.Black-Shoals.dll": {}
+        }
+      },
+      "Module.Black-Shoals/1.0.0": {
+        "runtime": {
+          "Module.Black-Shoals.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConsoleModule.Black-Shoals/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Module.Black-Shoals/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

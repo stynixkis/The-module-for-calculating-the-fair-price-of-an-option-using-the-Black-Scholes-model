@@ -1,12 +1,17 @@
 ﻿using Module.Black_Shoals.Classes;
 
-CalculatingFairPriceOfEuropeanOption newOption1 = new CalculatingFairPriceOfEuropeanOption(38.6459, 40, 0.1, 0.5, 0.3);
+CalculatingFairPriceOfEuropeanOption newOption1 = new CalculatingFairPriceOfEuropeanOption(40, 40, 0.1, 0.5, 0.3);
 PrintEurop(newOption1);
 
 Console.WriteLine("\n-------------\n");
 
-CalculatingFairPriceOfAmericanOption newOption = new CalculatingFairPriceOfAmericanOption(40, 40, 0.1, 0.5, 0.3, [0.7, 0.7], [(2.0 / 12), (5.0 / 12)]);
+CalculatingFairPriceOfAmericanOption newOption = new CalculatingFairPriceOfAmericanOption(40, 40, 0.1, 0.5, 0.3, [0.7], [(2.0 / 12)]);
 PrintAmerica(newOption);
+
+Console.WriteLine("\n-------------\n");
+
+CalculatingFairPriceOfEuropeanOption newOption2 = new CalculatingFairPriceOfEuropeanOption(40, 40, 0.1, 0.5, 0.3, 0.243);
+PrintEurop(newOption2);
 
 void PrintEurop(CalculatingFairPriceOfEuropeanOption newOption)
 {
@@ -21,12 +26,14 @@ void PrintEurop(CalculatingFairPriceOfEuropeanOption newOption)
 
     Console.WriteLine("\nDelta C = " + newOption.GreeksValue.DeltaOptionCall);
     Console.WriteLine("Delta P = " + newOption.GreeksValue.DeltaOptionPut);
-    Console.WriteLine("Gamma = " + newOption.GreeksValue.Gamma);
-    Console.WriteLine("Vega = " + newOption.GreeksValue.Vega);
-    Console.WriteLine("Teta C = " + newOption.GreeksValue.TetaOptionCall);
-    Console.WriteLine("Teta P = " + newOption.GreeksValue.TetaOptionPut);
-    Console.WriteLine("Ro C = " + newOption.GreeksValue.RoOptionCall);
-    Console.WriteLine("Ro P = " + newOption.GreeksValue.RoOptionPut);
+    Console.WriteLine("Gamma C = " + newOption.GreeksValue.GammaOptionCall);
+    Console.WriteLine("Gamma P = " + newOption.GreeksValue.GammaOptionPut);
+    Console.WriteLine("Vega C = " + newOption.GreeksValue.VegaOptionCall);
+    Console.WriteLine("Vega P = " + newOption.GreeksValue.VegaOptionPut);
+    Console.WriteLine("Teta C = " + newOption.GreeksValue.ThetaOptionCall);
+    Console.WriteLine("Teta P = " + newOption.GreeksValue.ThetaOptionPut);
+    Console.WriteLine("Ro C = " + newOption.GreeksValue.RhoOptionCall);
+    Console.WriteLine("Ro P = " + newOption.GreeksValue.RhoOptionPut);
 }
 
 void PrintAmerica(CalculatingFairPriceOfAmericanOption newOption)
@@ -43,8 +50,8 @@ void PrintAmerica(CalculatingFairPriceOfAmericanOption newOption)
     Console.WriteLine("\nC = " + newOption.PriceOptionCall);
 
     Console.WriteLine("\nDelta C = " + newOption.GreeksValue.DeltaOptionCall);
-    Console.WriteLine("Gamma = " + newOption.GreeksValue.Gamma);
-    Console.WriteLine("Vega = " + newOption.GreeksValue.Vega);
-    Console.WriteLine("Teta C = " + newOption.GreeksValue.TetaOptionCall);
-    Console.WriteLine("Ro C = " + newOption.GreeksValue.RoOptionCall);
+    Console.WriteLine("Gamma = " + newOption.GreeksValue.GammaOptionCall);
+    Console.WriteLine("Vega = " + newOption.GreeksValue.VegaOptionCall);
+    Console.WriteLine("Teta C = " + newOption.GreeksValue.ThetaOptionCall);
+    Console.WriteLine("Ro C = " + newOption.GreeksValue.RhoOptionCall);
 }

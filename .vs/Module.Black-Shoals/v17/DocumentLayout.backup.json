@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11CDB590-2506-49F4-85EF-68B58AC147B9}|Module.Black-Shoals\\Module.Black-Shoals.csproj|c:\\users\\aagor\\source\\repos\\module.black-shoals\\module.black-shoals\\classes\\calculatingfairpriceofeuropeanoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11CDB590-2506-49F4-85EF-68B58AC147B9}|Module.Black-Shoals\\Module.Black-Shoals.csproj|solutionrelative:module.black-shoals\\classes\\calculatingfairpriceofeuropeanoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3141C1F9-3585-4478-B593-32AFF253539E}|ConsoleModule.Black-Shoals\\ConsoleModule.Black-Shoals.csproj|c:\\users\\aagor\\source\\repos\\module.black-shoals\\consolemodule.black-shoals\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3141C1F9-3585-4478-B593-32AFF253539E}|ConsoleModule.Black-Shoals\\ConsoleModule.Black-Shoals.csproj|solutionrelative:consolemodule.black-shoals\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11CDB590-2506-49F4-85EF-68B58AC147B9}|Module.Black-Shoals\\Module.Black-Shoals.csproj|c:\\users\\aagor\\source\\repos\\module.black-shoals\\module.black-shoals\\classes\\calculatingfairpriceofamericanoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11CDB590-2506-49F4-85EF-68B58AC147B9}|Module.Black-Shoals\\Module.Black-Shoals.csproj|solutionrelative:module.black-shoals\\classes\\calculatingfairpriceofamericanoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11CDB590-2506-49F4-85EF-68B58AC147B9}|Module.Black-Shoals\\Module.Black-Shoals.csproj|c:\\users\\aagor\\source\\repos\\module.black-shoals\\module.black-shoals\\classes\\calculatinggreeks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11CDB590-2506-49F4-85EF-68B58AC147B9}|Module.Black-Shoals\\Module.Black-Shoals.csproj|solutionrelative:module.black-shoals\\classes\\calculatinggreeks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,54 +42,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "CalculatingFairPriceOfAmericanOption.cs",
               "DocumentMoniker": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\Module.Black-Shoals\\Classes\\CalculatingFairPriceOfAmericanOption.cs",
               "RelativeDocumentMoniker": "Module.Black-Shoals\\Classes\\CalculatingFairPriceOfAmericanOption.cs",
               "ToolTip": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\Module.Black-Shoals\\Classes\\CalculatingFairPriceOfAmericanOption.cs",
               "RelativeToolTip": "Module.Black-Shoals\\Classes\\CalculatingFairPriceOfAmericanOption.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAwDMAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAqwIIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T21:48:57.632Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\ConsoleModule.Black-Shoals\\Program.cs",
-              "RelativeDocumentMoniker": "ConsoleModule.Black-Shoals\\Program.cs",
-              "ToolTip": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\ConsoleModule.Black-Shoals\\Program.cs",
-              "RelativeToolTip": "ConsoleModule.Black-Shoals\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T21:48:41.975Z",
+              "WhenOpened": "2025-12-07T02:24:39.924Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CalculatingFairPriceOfEuropeanOption.cs",
-              "DocumentMoniker": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\Module.Black-Shoals\\Classes\\CalculatingFairPriceOfEuropeanOption.cs",
-              "RelativeDocumentMoniker": "Module.Black-Shoals\\Classes\\CalculatingFairPriceOfEuropeanOption.cs",
-              "ToolTip": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\Module.Black-Shoals\\Classes\\CalculatingFairPriceOfEuropeanOption.cs*",
-              "RelativeToolTip": "Module.Black-Shoals\\Classes\\CalculatingFairPriceOfEuropeanOption.cs*",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAIwEkAAAA9AAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\ConsoleModule.Black-Shoals\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleModule.Black-Shoals\\Program.cs",
+              "ToolTip": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\ConsoleModule.Black-Shoals\\Program.cs",
+              "RelativeToolTip": "ConsoleModule.Black-Shoals\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T11:56:37.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CalculatingGreeks.cs",
-              "DocumentMoniker": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\Module.Black-Shoals\\Classes\\CalculatingGreeks.cs",
-              "RelativeDocumentMoniker": "Module.Black-Shoals\\Classes\\CalculatingGreeks.cs",
-              "ToolTip": "C:\\Users\\aagor\\source\\repos\\Module.Black-Shoals\\Module.Black-Shoals\\Classes\\CalculatingGreeks.cs",
-              "RelativeToolTip": "Module.Black-Shoals\\Classes\\CalculatingGreeks.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAowJIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-22T23:03:06.273Z",
+              "WhenOpened": "2025-12-07T01:43:29.508Z",
               "EditorCaption": ""
             }
           ]

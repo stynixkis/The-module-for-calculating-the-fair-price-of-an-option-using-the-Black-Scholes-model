@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module.Black-Shoals", "Module.Black-Shoals\Module.Black-Shoals.csproj", "{11CDB590-2506-49F4-85EF-68B58AC147B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleModule.Black-Shoals", "ConsoleModule.Black-Shoals\ConsoleModule.Black-Shoals.csproj", "{3141C1F9-3585-4478-B593-32AFF253539E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleModule.Black-Shoals", "ConsoleModule.Black-Shoals\ConsoleModule.Black-Shoals.csproj", "{3141C1F9-3585-4478-B593-32AFF253539E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

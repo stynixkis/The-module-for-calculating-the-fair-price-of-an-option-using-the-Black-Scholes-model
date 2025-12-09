@@ -57,43 +57,10 @@
         /// <returns></returns>
         public new double CalculatingPriceOption_Call()
         {
-            //double europeanToMaturity = base.CalculatingPriceOption_Call();
-
-            //Console.WriteLine("Опцион, который исполняется только в дату экспирации: " + europeanToMaturity);
-            //Console.WriteLine("d1:" + _d1 + "  d2: " + _d2);
-
-            //double lastDividendTime = DividendTimes[DividendTimes.Length - 1];
-            //double adjustedPrice = CurrentPriceOfUnderlyingAsset;
-
-            //for (int i = 0; i < Dividends.Length; i++)
-            //{
-            //    adjustedPrice -= Dividends[i] * Math.Exp(-RiskFreeInterestRate * DividendTimes[i]);
-            //}
-
-            //Console.WriteLine(CurrentPriceOfUnderlyingAsset - adjustedPrice);
-            //double tempCurrentPrice = CurrentPriceOfUnderlyingAsset;
-            //CurrentPriceOfUnderlyingAsset = adjustedPrice;
-
-            //_d1 = Calculating_d1();
-            //_d2 = Calculating_d2();
-
-            //double europeanToLastDividend = base.CalculatingPriceOption_Call();
-
-            //Console.WriteLine("Опцион перед последним дивидендом: " + europeanToLastDividend);
-            //Console.WriteLine("d1:" + _d1 + "  d2: " + _d2);
-
-            //if (europeanToLastDividend < europeanToMaturity)
-            //{
-            //    CurrentPriceOfUnderlyingAsset = tempCurrentPrice;
-
-            //    _d1 = Calculating_d1();
-            //    _d2 = Calculating_d2();
-            //}
-
             double[] europeanToLastDividend = FirstMethod();
             double[] europeanToMaturity = SecondMethod();
 
-            if(europeanToMaturity[0] > europeanToLastDividend[0])
+            if (europeanToMaturity[0] > europeanToLastDividend[0])
             {
                 CurrentPriceOfUnderlyingAsset = europeanToMaturity[1];
                 TimeToOptioneExpiration = europeanToMaturity[2];
@@ -103,8 +70,8 @@
                 CurrentPriceOfUnderlyingAsset = europeanToLastDividend[1];
             }
 
-            _d1 = Calculating_d1();
-            _d2 = Calculating_d2();
+            D1 = Calculating_d1();
+            D2 = Calculating_d2();
 
             PriceOptionCall = base.CalculatingPriceOption_Call();
 
@@ -127,24 +94,23 @@
                 adjustedPrice -= Dividends[i] * Math.Exp(-RiskFreeInterestRate * DividendTimes[i]);
             }
 
-            //Console.WriteLine(CurrentPriceOfUnderlyingAsset - adjustedPrice);
             double tempCurrentPrice = CurrentPriceOfUnderlyingAsset;
             CurrentPriceOfUnderlyingAsset = adjustedPrice;
 
-            _d1 = Calculating_d1();
-            _d2 = Calculating_d2();
+            D1 = Calculating_d1();
+            D2 = Calculating_d2();
 
             double europeanToLastDividend = base.CalculatingPriceOption_Call();
 
             Console.WriteLine("Европейский колл с тем же сроком погашения, что и у оцениваемого американского колла, но с ценой акций, уменьшенной на текущую стоимость дивидендов: "
                 + europeanToLastDividend);
-            Console.WriteLine("d1:" + _d1 + "  d2: " + _d2);
+            Console.WriteLine("d1:" + D1 + "  d2: " + D2);
             CurrentPriceOfUnderlyingAsset = tempCurrentPrice;
 
-            _d1 = Calculating_d1();
-            _d2 = Calculating_d2();
+            D1 = Calculating_d1();
+            D2 = Calculating_d2();
 
-            return [europeanToLastDividend, adjustedPrice];
+            return [europeanToLastDividend, Math.Round(adjustedPrice, 2)];
         }
         /// <summary>
         /// Это второй метод расчёта, который гласит: 
@@ -154,9 +120,11 @@
         /// <returns></returns>
         private double[] SecondMethod()
         {
+            if (Dividends.Length < 2 || DividendTimes.Length < 2)
+                return [0, CurrentPriceOfUnderlyingAsset, TimeToOptioneExpiration];
+
             double presentValueOfDividendsAtExDividendDatee = Dividends[Dividends.Length - 2] * Math.Exp(-RiskFreeInterestRate * DividendTimes[DividendTimes.Length - 2]);
             double adjustedPrice = CurrentPriceOfUnderlyingAsset - presentValueOfDividendsAtExDividendDatee;
-            //Console.WriteLine(presentValueOfDividendsAtExDividendDatee + "   " + adjustedPrice);
 
             double tempCurrentPrice = CurrentPriceOfUnderlyingAsset;
             CurrentPriceOfUnderlyingAsset = adjustedPrice;
@@ -164,21 +132,21 @@
             double tempTime = TimeToOptioneExpiration;
             TimeToOptioneExpiration = DividendTimes[DividendTimes.Length - 1];
 
-            _d1 = Calculating_d1();
-            _d2 = Calculating_d2();
+            D1 = Calculating_d1();
+            D2 = Calculating_d2();
 
             double europeanToLastDividend = base.CalculatingPriceOption_Call();
 
             Console.WriteLine("Европейский колл, срок действия которого истекает за день до выплаты дивидендов.: "
                 + europeanToLastDividend);
-            Console.WriteLine("d1:" + _d1 + "  d2: " + _d2);
+            Console.WriteLine("d1:" + D1 + "  d2: " + D2);
             CurrentPriceOfUnderlyingAsset = tempCurrentPrice;
             TimeToOptioneExpiration = tempTime;
 
-            _d1 = Calculating_d1();
-            _d2 = Calculating_d2();
+            D1 = Calculating_d1();
+            D2 = Calculating_d2();
 
-            return [europeanToLastDividend, adjustedPrice, DividendTimes[DividendTimes.Length - 1]];
+            return [europeanToLastDividend, Math.Round(adjustedPrice, 2), DividendTimes[DividendTimes.Length - 1]];
         }
     }
 }

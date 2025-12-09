@@ -30,11 +30,11 @@ namespace Module.Black_Shoals.Classes
         /// <summary>
         /// Коэффициент d1
         /// </summary>
-        internal double _d1 { get; set; }
+        internal double D1 { get; set; }
         /// <summary>
         /// Коэффициент d2
         /// </summary>
-        internal double _d2 { get; set; }
+        internal double D2 { get; set; }
         /// <summary>
         /// Стоимость опциона Call
         /// </summary>
@@ -64,14 +64,48 @@ namespace Module.Black_Shoals.Classes
             TimeToOptioneExpiration = timeToOptioneExpiration;
             Volatility = volatility;
 
-            _d1 = Calculating_d1();
-            _d2 = Calculating_d2();
+            D1 = Calculating_d1();
+            D2 = Calculating_d2();
 
             PriceOptionCall = CalculatingPriceOption_Call();
             PriceOptionPut = CalculatingPriceOption_Put();
 
             GreeksValue = new CalculatingGreeks(this);
         }
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="currentPriceOfUnderlyingAsset">Рыночная цена</param>
+        /// <param name="strike">Цена исполнения (страйк)</param>
+        /// <param name="riskFreeInterestRate">Безрисковая процентная ставка</param>
+        /// <param name="timeToOptioneExpiration">Время до экспирации</param>
+        /// <param name="volatilityForCall">Волатильность для опциона Call</param>
+        /// <param name="volatilityForPut">Волатильность для опциона Put</param>
+        public CalculatingFairPriceOfEuropeanOption(double currentPriceOfUnderlyingAsset, double strike,
+    double riskFreeInterestRate, double timeToOptioneExpiration, double volatilityForCall, double volatilityForPut)
+        {
+            CurrentPriceOfUnderlyingAsset = currentPriceOfUnderlyingAsset;
+            Strike = strike;
+            RiskFreeInterestRate = riskFreeInterestRate;
+            TimeToOptioneExpiration = timeToOptioneExpiration;
+            Volatility = (volatilityForCall + volatilityForPut) / 2.0;
+
+            D1 = Calculating_d1(volatilityForCall);
+            D2 = Calculating_d2(volatilityForCall);
+
+            double d1_call = D1; double d2_call = D2;
+
+            PriceOptionCall = CalculatingPriceOption_Call();
+
+            D1 = Calculating_d1(volatilityForPut);
+            D2 = Calculating_d2(volatilityForPut);
+
+            PriceOptionPut = CalculatingPriceOption_Put();
+
+            GreeksValue = new CalculatingGreeks(CurrentPriceOfUnderlyingAsset, Strike, RiskFreeInterestRate, TimeToOptioneExpiration,
+                volatilityForCall, volatilityForPut, d1_call, d2_call, D1, D2);
+        }
+
         /// <summary>
         /// Метод подсчета коэффициента d1
         /// </summary>
@@ -85,12 +119,34 @@ namespace Module.Black_Shoals.Classes
             return valueNumerator / valueDenominator;
         }
         /// <summary>
+        ///  Метод подсчета коэффициента d1 с передаваемой волатильностью
+        /// </summary>
+        /// <param name="volatility">Волатильность</param>
+        /// <returns></returns>
+        protected double Calculating_d1(double volatility)
+        {
+            double valueOne = Math.Log(CurrentPriceOfUnderlyingAsset / Strike);
+            double valueTwo = RiskFreeInterestRate + (Math.Pow(volatility, 2) / 2);
+            double valueNumerator = valueOne + valueTwo * TimeToOptioneExpiration;
+            double valueDenominator = volatility * Math.Sqrt(TimeToOptioneExpiration);
+            return valueNumerator / valueDenominator;
+        }
+        /// <summary>
         /// Метод подсчета коэффициента d2
         /// </summary>
         /// <returns></returns>
         protected double Calculating_d2()
         {
-            return _d1 - Volatility * Math.Sqrt(TimeToOptioneExpiration);
+            return D1 - Volatility * Math.Sqrt(TimeToOptioneExpiration);
+        }
+        /// <summary>
+        /// Метод подсчета коэффициента d2 с передаваемой волатильностью
+        /// </summary>
+        /// <param name="volatility">Волатильность</param>
+        /// <returns></returns>
+        protected double Calculating_d2(double volatility)
+        {
+            return D1 - volatility * Math.Sqrt(TimeToOptioneExpiration);
         }
         /// <summary>
         /// Метод подсчета цены опциона Call
@@ -98,8 +154,8 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         protected double CalculatingPriceOption_Call()
         {
-            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.StandardNormalCDF(_d1);
-            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.StandardNormalCDF(_d2);
+            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.StandardNormalCDF(D1);
+            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.StandardNormalCDF(D2);
             return Math.Round((valueOne - valueTwo), 2);
         }
         /// <summary>
@@ -108,8 +164,8 @@ namespace Module.Black_Shoals.Classes
         /// <returns></returns>
         private double CalculatingPriceOption_Put()
         {
-            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.StandardNormalCDF(-_d1);
-            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.StandardNormalCDF(-_d2);
+            double valueOne = CurrentPriceOfUnderlyingAsset * Methods.StandardNormalCDF(-D1);
+            double valueTwo = Strike * Math.Exp(-RiskFreeInterestRate * TimeToOptioneExpiration) * Methods.StandardNormalCDF(-D2);
             return Math.Round((valueTwo - valueOne), 2);
         }
     }
